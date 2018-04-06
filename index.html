@@ -22,16 +22,39 @@
 
   var database = firebase.database();
 
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
 
-  var canvas = document.getElementById("myCanvas")
-  var ctx = canvas.getContext("2d");
+canvas.addEventListener("touchstart", function (e) {
+  if (e.target == canvas) {
+    e.preventDefault();
+  }
+}, false);
+
+canvas.addEventListener("touchend", function (e) {
+  if (e.target == canvas) {
+    e.preventDefault();
+  }
+}, false);
+canvas.addEventListener("touchmove", function (e) {
+	var touch = e.touches[0];
+		  if (e.target == canvas) {
+			e.preventDefault();
+		  }
+            	database.ref().set({
+  		  		  x:touch.clientX,
+  		  		  y:touch.clientY
+	  		});
+}, false);
+
+
         canvas.addEventListener('mousemove', function(evt) {
         evt.preventDefault();
           console.log('Mouse position: ' + evt.clientX + ',' + evt.clientY);
-          	database.ref().set({
-		  		  x:evt.clientX,
-		  		  y:evt.clientY
-	  		});
+          	//database.ref().set({
+		  		 // x:evt.clientX,
+		  		 // y:evt.clientY
+	  		//});
       }, false);
 
   database.ref().on("value", function(e){
