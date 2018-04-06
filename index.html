@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SYNC TEST</title>
+</head>
+<body>
+<input id = "input"></input>
+<button id = "but"> UPDATE </button>
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBtLRlcXkrQQTcs-1Qp1Od2rbPoYcwTEHE",
+    authDomain: "sync-test-game.firebaseapp.com",
+    databaseURL: "https://sync-test-game.firebaseio.com",
+    projectId: "sync-test-game",
+    storageBucket: "sync-test-game.appspot.com",
+    messagingSenderId: "825894585819"
+  };
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
+
+  database.ref().set({
+  testval:"hi"
+  });
+  database.ref().on("value", function(e){
+  	document.write(e.val().testval);
+  });
+
+  document.getElementById("but").addEventListener("click", function(){
+		database.ref().set({
+		  testval:document.getElementById("input").value
+	  });
+  });
+</script>
+</body>
+</html>
