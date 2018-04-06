@@ -26,6 +26,7 @@
   var canvas = document.getElementById("myCanvas")
   var ctx = canvas.getContext("2d");
         canvas.addEventListener('mousemove', function(evt) {
+        evt.preventDefault();
           console.log('Mouse position: ' + evt.clientX + ',' + evt.clientY);
           	database.ref().set({
 		  		  x:evt.clientX,
